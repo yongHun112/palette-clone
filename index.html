@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팔레트</title>
+    <link rel="stylesheet" href="css/01.scss">
+    <link rel="stylesheet" href="css/01.css">
+
+    <script src="lib/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://assets.codepen.io/16327/SplitText3-beta.min.js?b=43"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.36/bundled/lenis.min.js"></script>
+
+    <script>
+        $(function () {
+
+            /* 마우스커서  */
+            const $cursor = $('.cursor');
+            let mouseX = 0, mouseY = 0;
+            let currentX = 0, currentY = 0;
+
+            $(window).on('mousemove', function (e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+            });
+            function animateCursor() {
+                currentX += (mouseX - currentX) * 0.15;
+                currentY += (mouseY - currentY) * 0.15;
+                $cursor.css({
+                    left: currentX + 'px',
+                    top: currentY + 'px'
+                });
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor(); // 실행
+
+            $('body a').on('mousemove', function () {
+                $('.cursor').addClass('active');
+            })
+
+            $('body a').on('mouseleave', function () {
+                $('.cursor').removeClass('active');
+            })
+
+
+
+            /* 헤더  */
+            $('.header .nav .gnb > li').on('mouseenter', function () {
+                $(this).find('.depth-02').addClass('active');
+                $('.header .background').addClass('active');
+            })
+            $('.header .nav .gnb > li').on('mouseleave', function () {
+                $(this).find('.depth-02').removeClass('active');
+                $('.header .background').removeClass('active');
+            })
+
+            /* 스크롤 헤더 색상  */
+            header = $('.header');
+            $(window).on('scroll', function () {
+
+                scrollBar = window.scrollY;
+
+                if (scrollBar > 0) {
+                    $(header).addClass('active');
+                } else {
+                    $(header).removeClass('active');
+                }
+            });
+
+
+            /* 모바일 버튼  */
+            menuBtn = $('.mobile_btn');
+            allMenu = $('.header .inner .nav_mobile');
+            $(menuBtn).on('click', function () {
+                $(allMenu).toggleClass('active');
+            })
+
+            /* 메인비주얼 타이틀텍스트 애니메이션 */
+            $(document).ready(function () {
+                const text = $('.main_visual .title span');
+                const split = new SplitText(text[0], { type: "chars" });
+
+                gsap.from(split.chars, {
+                    y: 50,            // 아래에서 올라오는 효과
+                    opacity: 0,       // 시작은 투명
+                    duration: 2,     // 1.2초 동안 애니메이션
+                    ease: "elastic.out(1, 0.75)", // 부드럽게 애니메이션
+                    stagger: 0.05     // 각 글자가 0.05초씩 차례대로 나타남
+                });
+            });
+
+
+            /* section-01 h2 효과 */
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.fromTo('.section-01 .inner .text h2', {
+                'background-size': '0% 100%'
+            }, {
+                'background-size': '100% 100%',
+                scrollTrigger: {
+                    trigger: '.section-01 .inner',
+                    pinnedContainer: '.section-01 .inner',
+                    start: '10% 35%',
+                    end: '40% 85%',
+                    /*markers: true,  */
+                    scrub: 1
+
+                }
+            })
+            /* section-01 h3 효과 */
+            gsap.fromTo('.section-01 .inner .text h3', {
+                'background-size': '0% 100%',
+                'opacity': '0'
+            }, {
+                'background-size': '100% 100%',
+                'opacity': '1',
+                scrollTrigger: {
+                    trigger: '.section-01 .inner',
+                    pinnedContainer: '.section-01 .inner',
+                    start: '25% 0%',
+                    end: '76% 100%',
+                    /*    markers: true,  */
+                    scrub: 2
+                }
+            })
+
+            /* section-01 버튼 효과 */
+            gsap.fromTo('.section-01 .inner .text .main_btn a', {
+                'background-size': '0% 100%',
+                'opacity': '0'
+            }, {
+                'background-size': '100% 100%',
+                'opacity': '1',
+                scrollTrigger: {
+                    trigger: '.section-01 .inner',
+                    pinnedContainer: '.section-01 .inner',
+                    start: '55% 0%',
+                    end: '90% 100%',
+                    /*  markers: true,  */
+                    scrub: 2
+                }
+            })
+
+            /* section-02 h2 효과 */
+
+
+            gsap.fromTo('.section-02 .inner h2', {
+                'background-size': '0% 100%'
+            }, {
+                'background-size': '100% 100%',
+                scrollTrigger: {
+                    trigger: '.section-02 .inner',
+                    pinnedContainer: '.section-02 .inner',
+                    start: '0% 35%',
+                    end: '10% 80%',
+                    /* markers: true,  */
+                    scrub: 3
+
+                }
+            })
+
+            /* section-03 h2 효과 */
+
+
+            gsap.fromTo('.section-03 .inner h2', {
+                'background-size': '0% 100%'
+            }, {
+                'background-size': '100% 100%',
+                scrollTrigger: {
+                    trigger: '.section-03 .inner',
+                    pinnedContainer: '.section-03 .inner',
+                    start: '0% 90%',
+                    end: '40% 70%',
+                    /* markers: true,  */
+                    scrub: 3
+
+                }
+            })
+
+            /* section-04 이미지 무한슬라이드 */
+
+            //const list = document.querySelector('.section-04 .item.left');
+
+            //const clone = list.cloneNode(true);
+           // list.parentNode.appendChild(clone);
+
+           // clone.style.position = 'absolute';
+         //   clone.style.top = list.scrollHeight + 'px';
+
+
+
+
+        });  /* script end */
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="cursor"></div>
+        <header class="header">
+            <div class="background"></div>
+            <div class="inner">
+                <h1 class="logo">
+                    <a href="#"><img src="img/logo.white.png" alt=""></a>
+                </h1> <!-- logo end -->
+
+                <nav class="nav">
+                    <ul class="gnb">
+                        <li><a href="#" class="depth-01">Company</a>
+                            <ul class="depth-02">
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">News</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul> <!-- depth-02 end -->
+                        </li> <!-- depth-01 end -->
+
+                        <li><a href="#" class="depth-01">Service</a>
+                            <ul class="depth-02">
+                                <li><a href="#">Palette AI</a></li>
+                                <li><a href="#">Palette Link</a></li>
+                                <li><a href="#">Video Production</a></li>
+                                <li><a href="#">Digital Marketing</a></li>
+                            </ul> <!-- depth-02 end -->
+                        </li> <!-- depth-01 end -->
+
+                        <li><a href="#" class="depth-01">Works</a>
+                            <ul class="depth-02">
+                                <li><a href="#">Portfolio · Video</a></li>
+                            </ul> <!-- depth-02 end -->
+                        </li> <!-- depth-01 end -->
+
+                        <li><a href="#" class="depth-01">Blog</a></li><!-- depth-01 end -->
+                    </ul> <!-- gnb end -->
+                </nav> <!-- nav end -->
+
+                <nav class="nav_mobile mobile">
+                    <div class="mobile_inner">
+                        <div class="mobile_header">
+                            <div class="mobile_logo">
+                                <a href="#"><img src="img/logo.white.png" alt=""></a>
+                            </div> <!-- logo end -->
+                            <a href="#" class="mobile_btn close">
+                                <span class="top"></span>
+                                <span class="bottom"></span>
+                            </a> <!-- mobile_btn close -->
+                        </div> <!-- mobile_header end -->
+
+                        <div class="mobile_info">
+                            <ul class="mobile_gnb">
+                                <li><span>01</span><a href="#" class="depth-01">Company</a>
+                                    <ul class="depth-02">
+                                        <li><a href="#">About <div class="line"></div></a></li>
+                                        <li><a href="#">News <div class="line"></div></a></li>
+                                        <li><a href="#">Contact</a></li>
+                                    </ul> <!-- depth-02 end -->
+                                </li> <!-- depth-01 end -->
+                                <li><span>02</span><a href="#" class="depth-01">Service</a>
+                                    <ul class="depth-02">
+                                        <li><a href="#">Palette AI <div class="line"></div></a></li>
+                                        <li><a href="#">Palette Link <div class="line"></div></a></li>
+                                        <li><a href="#">Video Production <div class="line"></div></a></li>
+                                        <li><a href="#">Digital Marketing</a></li>
+                                    </ul> <!-- depth-02 end -->
+                                </li> <!-- depth-01 end -->
+                                <li><span>03</span><a href="#" class="depth-01">Works</a>
+                                    <ul class="depth-02">
+                                        <li><a href="#">Portfolio · Video</a></li>
+                                    </ul> <!-- depth-02 end -->
+                                </li> <!-- depth-01 end -->
+                                <li><span>04</span><a href="#" class="depth-01">Blog</a></li><!-- depth-01 end -->
+                            </ul> <!-- gnb end -->
+                        </div> <!-- mobile_info end -->
+                    </div> <!-- mobile_inner end -->
+
+                    <div class="text_info">
+                        <p>서울시 서초구 양재대로 2길 18 호반파크 2관 4층</p>
+                        <p>010-3490-9181</p>
+                        <p>hello@pltt.xyz</p>
+                        <p>© Palette Corp. All rights reserved.</p>
+                    </div> <!-- text_info end -->
+                </nav> <!-- nav_mobile mobile end -->
+
+
+                <div class="option">
+                    <div class="language">
+                        <a href="#">KR</a>
+                        <a href="#" class="none">EN</a>
+                    </div> <!-- language end -->
+
+                    <div class="line"></div>
+
+                    <div class="sns">
+                        <a href="#"><img src="img/naver.svg" alt=""></a>
+                        <a href="#"><img src="img/insta.svg" alt=""></a>
+                        <a href="#"><img src="img/linked.svg" alt=""></a>
+                    </div> <!-- sns end -->
+
+                    <div class="line"></div>
+
+                    <a href="#" class="mobile_btn open">
+                        <span class="top"></span>
+                        <span class="bottom"></span>
+                    </a> <!-- mobile_btn open -->
+
+                </div> <!-- option end -->
+            </div> <!-- inner end -->
+        </header> <!-- header end -->
+
+        <section class="main_visual">
+            <video src="img/main_video.mp4" autoplay muted loop></video>
+            <div class="title">
+                <span>Artful Craft, Colorful Tech</span>
+
+                <div class="main_btn">
+                    <a href="#">
+                        Go To Palette AI
+                        <i>
+                            <img src="img/wh-arrow.svg" alt="">
+                            <img src="img/bl-arrow.svg" alt="">
+                        </i>
+                    </a>
+                </div> <!-- main_btn end -->
+            </div> <!-- title end -->
+
+            <div class="scroll_line">
+                <p>Scroll</p>
+                <div class="line"></div>
+            </div> <!-- scroll_line end -->
+        </section> <!-- main_visual end -->
+
+        <section class="section-01">
+            <div class="inner">
+                <div class="text">
+                    <h2>Who We Are</h2>
+                    <h3>AI를 활용한 쉽고 빠른 영상제작</h3>
+                    <h3>영상 광고와 콘텐츠, AI 기반 영상 제작 플랫폼,<br />
+                        그리고 영상 창작자와 클라이언트를 긴밀하게 연결하는 오픈 플랫폼까지</h3>
+                    <h3>우리는 크리에이티브, 비주얼, 테크, 마케팅의 모든 영역에서<br />
+                        조화로운 답을 찾아내는<span> 솔루셔니스트</span>입니다.</h3>
+                    <div class="main_btn">
+                        <a href="#">
+                            View More
+                            <i>
+                                <img src="img/wh-arrow.svg" alt="">
+                                <img src="img/bl-arrow.svg" alt="">
+                            </i>
+                        </a>
+                    </div> <!-- main_btn end -->
+                </div> <!-- text end -->
+
+                <div class="image_wrap">
+                    <img src="img/si1.jpg" class="img i1" alt="">
+                    <img src="img/si2.jpg" class="img i2" alt="">
+                    <img src="img/si3.jpg" class="img i3" alt="">
+                    <img src="img/si4.jpg" class="img i4" alt="">
+                    <img src="img/si5.jpg" class="img i5" alt="">
+                </div> <!-- image_wrap end -->
+            </div> <!-- inner end -->
+
+        </section> <!-- section-01 end -->
+
+        <section class="section-02">
+            <div class="inner">
+                <h2>Our Works</h2>
+
+                <div class="category_wrap">
+                    <ul class="category">
+                        <li><button type="button" class="cag btn">AI Video</button></li>
+                        <li><button type="button" class="cag btn">Startup IR</button></li>
+                        <li><button type="button" class="cag btn">Shorts</button></li>
+                        <li><button type="button" class="cag btn">Product</button></li>
+                        <li><button type="button" class="cag btn">Brand</button></li>
+                        <li><button type="button" class="cag btn">Corp News</button></li>
+                    </ul> <!-- category end -->
+                </div> <!-- category_wrap end -->
+
+                <div class="box_wrap">
+                    <div class="box first_box">
+
+                        <div class="item left_item">
+                            <a href="#">
+                                <div class="image">
+                                    <img src="img/item_1.png" alt="Fashion by Palette">
+                                </div> <!-- image end -->
+                                <span>AI Video</span>
+                                <div class="text">
+                                    <p></p>
+                                    <h3>Fashion by Palette</h3>
+                                </div> <!-- text end -->
+                            </a>
+                        </div> <!-- left_item end -->
+
+                        <div class="item right_item">
+                            <a href="#">
+                                <div class="image">
+                                    <img src="img/item_2.png" alt="팔레트 AI Reele">
+                                </div> <!-- image end -->
+                                <span>AI Video</span>
+                                <div class="text">
+                                    <p>팔레트</p>
+                                    <h3>팔레트 AI Reel</h3>
+                                </div> <!-- text end -->
+                            </a>
+
+                            <a href="#">
+                                <div class="image">
+                                    <img src="img/item_3.jpg" alt="Sustainability in Motion">
+                                </div> <!-- image end -->
+                                <span>AI Video</span>
+                                <div class="text">
+                                    <p>GreenTech Innovations</p>
+                                    <h3>Sustainability in Motion</h3>
+                                </div> <!-- text end -->
+                            </a>
+                        </div> <!-- right_item end -->
+
+                    </div> <!-- first_box end -->
+
+                    <div class="box second_box">
+
+                        <div class="item left_item">
+                            <a href="#">
+                                <div class="image">
+                                    <img src="img/item_4.jpg" alt="Bold Moves, Timeless Style">
+                                </div> <!-- image end -->
+                                <span>AI Video</span>
+                                <div class="text">
+                                    <p>Vivid Fashion</p>
+                                    <h3>Bold Moves, Timeless Style</h3>
+                                </div> <!-- text end -->
+                            </a>
+                        </div> <!-- left_item end -->
+
+                        <div class="item right_item">
+                            <a href="#">
+                                <div class="image">
+                                    <img src="img/item_5.jpg" alt="Journey to the Horizon">
+                                </div> <!-- image end -->
+                                <span>AI Video</span>
+                                <div class="text">
+                                    <p>skylight Travel</p>
+                                    <h3>Journey to the Horizon</h3>
+                                </div> <!-- text end -->
+                            </a>
+                        </div> <!-- right_item end -->
+
+                    </div> <!-- second_box end -->
+
+                    <div class="box third_box">
+                        <a href="#">
+                            <div class="image">
+                                <img src="img/item_6.jpg" alt="Science for a Better Tomorrow">
+                            </div> <!-- image end -->
+                            <span>AI Video</span>
+                            <div class="text">
+                                <p>Nova Pharmaceuticals</p>
+                                <h3>Science for a Better Tomorrow</h3>
+                            </div> <!-- text end -->
+                        </a>
+                    </div> <!-- left_item end -->
+                </div> <!-- box_wrap end -->
+                <div class="main_btn">
+                    <a href="#">
+                        View More
+                        <i>
+                            <img src="img/wh-arrow.svg" alt="">
+                            <img src="img/bl-arrow.svg" alt="">
+                        </i>
+                    </a>
+                </div> <!-- main_btn end -->
+            </div> <!-- inner end -->
+        </section> <!-- section-02 end -->
+
+        <section class="section-03">
+            <div class="inner">
+                <h2>Our Service</h2>
+
+                <div class="item_wrap">
+                    <div class="item_box box01">
+                        <div class="image">
+                            <img src="img/main-service1.jpg" alt="">
+                        </div> <!-- image end -->
+                        <div class="text">
+                            <h3>Palette AI</h3>
+                            <p>Palette AI와 함께 나의 비즈니스에 필요한 영상을 쉽고 빠르게 만들어보세요.
+                                복잡한 편집 과정 없이도 프리미엄급 콘텐츠를 제작할 수 있습니다. 전문가의
+                                손길이 닿은 듯한 완성도, 하지만 놀라울 만큼 간단한 제작 과정 이것이 바로
+                                AI가 선사하는 새로운 영상 제작의 패러다임입니다.</p>
+                            <div class="main_btn">
+                                <a href="#">
+                                    View More
+                                    <i>
+                                        <img src="img/wh-arrow.svg" alt="">
+                                        <img src="img/bl-arrow.svg" alt="">
+                                    </i>
+                                </a>
+                            </div> <!-- main_btn end -->
+                        </div> <!-- text end -->
+                    </div> <!-- item_box end -->
+
+                    <div class="item_box box02">
+                        <div class="image">
+                            <img src="img/main-service2.jpg" alt="">
+                        </div> <!-- image end -->
+                        <div class="text">
+                            <h3>Palette Link</h3>
+                            <p>온라인 포트폴리오 페이지에 영상을 업로드하고, 작품을 세상에 선보이세요.
+                                새로운 프로젝트와 다양한 기회가 연결되는 출발점을 만나보세요. 영상 제작
+                                의뢰가 필요한 고객들은 신뢰할 수 있는 포트폴리오를 한눈에 확인하고,
+                                프로젝트에 적합한 전문가를 직접 선택할 수 있습니다. 광고 영상, 유튜브 편집,
+                                기업 홍보 영상 등 각 분야의 전문 제작자와 협업을 시작해 보세요.
+                            <div class="main_btn">
+                                <a href="#">
+                                    View More
+                                    <i>
+                                        <img src="img/wh-arrow.svg" alt="">
+                                        <img src="img/bl-arrow.svg" alt="">
+                                    </i>
+                                </a>
+                            </div> <!-- main_btn end -->
+                        </div> <!-- text end -->
+                    </div> <!-- item_box end -->
+
+                    <div class="item_box box03">
+                        <div class="image">
+                            <img src="img/main-service3.jpg" alt="">
+                        </div> <!-- image end -->
+                        <div class="text">
+                            <h3>영상제작 서비스</h3>
+                            <p>비즈니스의 진정한 성장은 차별화된 영상 전략에서 시작됩니다. 전통적인
+                                영상제작부터 AI 기술을 활용한 맞춤형 영상 광고까지, 창의적인 콘텐츠 제작을
+                                통해 당신의 브랜드가 시장에서 돋보일 수 있도록 솔루션을 제시합니다.
+                                트렌디한 콘텐츠와 혁신적인 AI 솔루션으로 브랜드의 스토리를 더욱 매력적이고
+                                효과적으로 전달하세요.
+                            </p>
+                            <div class="main_btn">
+                                <a href="#">
+                                    View More
+                                    <i>
+                                        <img src="img/wh-arrow.svg" alt="">
+                                        <img src="img/bl-arrow.svg" alt="">
+                                    </i>
+                                </a>
+                            </div> <!-- main_btn end -->
+                        </div> <!-- text end -->
+                    </div> <!-- item_box end -->
+
+                    <div class="item_box box04">
+                        <div class="image">
+                            <img src="img/main-service4.jpg" alt="">
+                        </div> <!-- image end -->
+                        <div class="text">
+                            <h3>디지털 마케팅</h3>
+                            <p>SNS에서 돋보이는 콘텐츠를 제작하여 당신의 메시지를 효과적으로 전달합니다.
+                                AI와 창의적 마케팅 노하우를 결합하여 팔로워의 마음을 사로잡고, 데이터와
+                                감성의 완벽한 조화로 브랜드 가치를 높입니다.</p>
+                            <div class="main_btn">
+                                <a href="#">
+                                    View More
+                                    <i>
+                                        <img src="img/wh-arrow.svg" alt="">
+                                        <img src="img/bl-arrow.svg" alt="">
+                                    </i>
+                                </a>
+                            </div> <!-- main_btn end -->
+                        </div> <!-- text end -->
+                    </div> <!-- item_box end -->
+                </div> <!-- item_wrap end -->
+            </div> <!-- inner end -->
+        </section> <!-- section-03 end -->
+
+        <section class="section-partner">
+            <img src="img/partner-marquee.svg" alt="">
+            <img src="img/partner-marquee.svg" alt="">
+        </section> <!-- section-partner end -->
+
+        <section class="section-04">
+            <div class="inner">
+                <a href="#" class="title"> -
+                    <div class="title_box">
+                        <span>당신의 다음 스텝을 고민 중이신가요?</span>
+                        <h2 class="animated-title"><span class="top">Let's Turn Ideas</span><br />
+                            <span class="bottom">into Reality</span>
+                        </h2>
+                    </div> <!-- title_box end -->
+                </a> <!-- title end -->
+                <div class="wrap left_wrap">
+                    <ul class="item left">
+                        <li class="left1"><img src="img/contact-left1.jpg" alt=""></li>
+                        <li class="left2"><img src="img/contact-left2.jpg" alt=""></li>
+                        <li class="left3"><img src="img/contact-left3.jpg" alt=""></li>
+                        <li class="left4"><img src="img/contact-left4.jpg" alt=""></li>
+                        <li class="left5"><img src="img/contact-left5.jpg" alt=""></li>
+                    </ul> <!-- left end -->
+                    <ul class="item left">
+                        <li class="left1"><img src="img/contact-left1.jpg" alt=""></li>
+                        <li class="left2"><img src="img/contact-left2.jpg" alt=""></li>
+                        <li class="left3"><img src="img/contact-left3.jpg" alt=""></li>
+                        <li class="left4"><img src="img/contact-left4.jpg" alt=""></li>
+                        <li class="left5"><img src="img/contact-left5.jpg" alt=""></li>
+                    </ul> <!-- left end -->
+                </div> <!-- left_wrap end -->
+                <div class="wrap right_wrap">
+                    <ul class="item right">
+                        <li class="right1"><img src="img/contact-right1.jpg" alt=""></li>
+                        <li class="right2"><img src="img/contact-right2.jpg" alt=""></li>
+                        <li class="right3"><img src="img/contact-right3.jpg" alt=""></li>
+                        <li class="right4"><img src="img/contact-right4.jpg" alt=""></li>
+                        <li class="right5"><img src="img/contact-right5.jpg" alt=""></li>
+                    </ul> <!-- right end -->
+                    <ul class="item right">
+                        <li class="right1"><img src="img/contact-right1.jpg" alt=""></li>
+                        <li class="right2"><img src="img/contact-right2.jpg" alt=""></li>
+                        <li class="right3"><img src="img/contact-right3.jpg" alt=""></li>
+                        <li class="right4"><img src="img/contact-right4.jpg" alt=""></li>
+                        <li class="right5"><img src="img/contact-right5.jpg" alt=""></li>
+                    </ul> <!-- right end -->
+                </div> <!-- right_wrap end -->
+            </div> <!-- inner end -->
+        </section> <!-- section-04 end -->
+
+        <footer class="footer">
+            <div class="inner">
+
+                <div class="footer_menu">
+                    <a href="#" class="logo">
+                        <img src="img/logo.white.png" alt="">
+                    </a>    <!-- logo end -->
+
+                    <ul class="nav">
+                        <li><a href="#">Company</a></li>
+                        <li><a href="#">Service</a></li>
+                        <li><a href="#">Works</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>   <!-- nav end -->
+                </div>  <!-- footer_menu end -->
+
+                <div class="footer_info">
+                    <div class="name">
+                        <div class="box top">
+                            <div class="com">
+                                <b>상호명</b>
+                                <p>팔레트 주식회사</p>
+                            </div>  <!-- com end -->
+                            <div class="com">
+                                <b>이메일</b>
+                                <p>hello@pltt.xyz</p>
+                            </div>  <!-- com end -->
+                        </div>  <!-- box.top end -->
+
+                        <div class="box bottom">
+                            <div class="com">
+                                <b>전화번호</b>
+                                <p>02-568-9181</p>
+                            </div>  <!-- com end -->
+                            <div class="com">
+                                <b>대표자</b>
+                                <p>이종근</p>
+                            </div>  <!-- com end -->
+                            <div class="com">
+                                <b>사업자등록번호</b>
+                                <p>354-88-00939</p>
+                            </div>  <!-- com end -->
+                        </div>  <!-- box.bottom end -->
+                    </div>  <!-- name end -->
+
+                    <div class="sns_wrap">
+                        <a href="#" class="sns"><img src="img/naver.svg" alt=""></a>
+                        <a href="#" class="sns"><img src="img/insta.svg" alt=""></a>
+                        <a href="#" class="sns"><img src="img/linked.svg" alt=""></a>
+                    </div>  <!-- sns_wrap end -->
+                </div>  <!-- footer_info end -->
+
+                <div class="footer_map">
+                    <ul>
+                        <li>
+                            <b>본사</b>
+                             <p>서울특별시 강남구 논현로161길 51, B1~4층 (신사동, 라온빌딩)</p>
+                        </li>
+                        <li>
+                            <b>싱가포르 법인 지사</b>
+                             <p>8 MARINA VIEW #39-04 ASIA SQUARE TOWER 1 SINGAPORE (018960)</p>
+                        </li>
+                        <li>
+                            <b>인도 법인 지사</b>
+                             <p>8th floor(Enzyme Managed Office) block 3B of Bhartiya Centre of Information Technology (BCIT), Thanisandra Main Road BANGALORE KARNATAKA, INDIA (560064)</p>
+                        </li>
+                    </ul>
+                </div>  <!-- footer_map end -->
+
+                <div class="footer_bottom">
+                    <div class="left">
+                        <a href="#">개인정보처리방침침</a>
+                    </div>  <!-- left end -->
+
+                    <address>© PALETTE CO. LTD. All rights reserved.</address>
+                </div>  <!-- footer_bottom end -->
+
+
+
+            </div>  <!-- inner end -->
+        </footer>   <!-- footer end -->
+    </div> <!-- wrap end -->
+</body>
+
+</html>
