@@ -7,13 +7,13 @@
     <title>팔레트</title>
     <link rel="stylesheet" href="css/01.scss">
     <link rel="stylesheet" href="css/01.css">
+    
 
     <script src="lib/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://assets.codepen.io/16327/SplitText3-beta.min.js?b=43"></script>
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.36/bundled/lenis.min.js"></script>
-
     <script>
         $(function () {
 
@@ -180,19 +180,13 @@
 
                 }
             })
-
-            /* section-04 이미지 무한슬라이드 */
-
-            //const list = document.querySelector('.section-04 .item.left');
-
-            //const clone = list.cloneNode(true);
-           // list.parentNode.appendChild(clone);
-
-           // clone.style.position = 'absolute';
-         //   clone.style.top = list.scrollHeight + 'px';
-
-
-
+            /* section-04 타이틀 효과 */
+            $('.section-04 .animated-title').on('mouseenter', function (){
+                $(this).addClass('active');
+            })
+            $('.section-04 .animated-title').on('mouseleave', function (){
+                $(this).removeClass('active');
+            })
 
         });  /* script end */
     </script>
@@ -201,6 +195,17 @@
 <body>
     <div class="wrap">
         <div class="cursor"></div>
+        <ul class="side_btn">
+            <li class="contact_btn">
+                <img src="img/rotate-txt.svg" class="rotate" alt="">
+                <a href="#"><img src="img/contact.svg" alt=""></a>
+            </li>   <!-- contact-btn end -->
+
+            <li class="top_btn">
+                <a href="#"><img src="img/top-arrow.svg" alt=""></a>
+            </li>   <!-- top_btn end -->
+        </ul>  <!-- side_btn end -->
+
         <header class="header">
             <div class="background"></div>
             <div class="inner">
@@ -299,7 +304,7 @@
                         <a href="#"><img src="img/linked.svg" alt=""></a>
                     </div> <!-- sns end -->
 
-                    <div class="line"></div>
+                    <div class="line line02"></div>
 
                     <a href="#" class="mobile_btn open">
                         <span class="top"></span>
@@ -694,7 +699,7 @@
 
                 <div class="footer_bottom">
                     <div class="left">
-                        <a href="#">개인정보처리방침침</a>
+                        <a href="#">개인정보처리방침</a>
                     </div>  <!-- left end -->
 
                     <address>© PALETTE CO. LTD. All rights reserved.</address>
